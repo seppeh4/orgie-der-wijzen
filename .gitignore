@@ -4,3 +4,4 @@ dist/
 .wrangler/
 .DS_Store
 recipes-met-bronnen.json
+public/fotos/

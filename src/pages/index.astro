@@ -269,6 +269,50 @@ footer { background: var(--brick-deep); color: var(--on-brick); margin-top: auto
 footer .wrap { padding-block: 30px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: .82rem; opacity: .85; }
 footer .logo { font-size: 1.15rem; }
 
+
+/* Photos */
+.plate img { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+.plate img.on { opacity: 1; }
+.platecap .pc-t, .platecap .pc-k { transition: opacity .4s; }
+.mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 190px; gap: 12px; }
+.tile { position: relative; border-radius: 20px; overflow: hidden; background: var(--card); border: 0; padding: 0; cursor: zoom-in; display: block; }
+.tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.tile:hover img { transform: scale(1.05); }
+.tile.big { grid-column: span 2; grid-row: span 2; }
+.tile.wide { grid-column: span 2; }
+.tile .cap { position: absolute; left: 10px; right: 10px; bottom: 10px; background: color-mix(in srgb, #1d1613 62%, transparent); color: #fbf1e7; font-size: .78rem; font-weight: 600; padding: 6px 10px; border-radius: 10px; text-align: left; opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s; }
+.tile:hover .cap, .tile:focus-visible .cap { opacity: 1; transform: none; }
+.albums { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.album { text-decoration: none; background: var(--card); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; }
+.album .cov { aspect-ratio: 4 / 3; overflow: hidden; }
+.album .cov img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.album:hover .cov img { transform: scale(1.04); }
+.album .meta { padding: 18px 22px 22px; }
+.album h3 { font-family: var(--f-display); font-weight: 600; font-size: 1.6rem; margin: 2px 0 4px; color: var(--red); }
+.album p { margin: 0; color: var(--muted); font-size: .9rem; }
+.gal-sec { margin-bottom: 48px; }
+.gal { columns: 3 260px; column-gap: 14px; }
+.gal figure { break-inside: avoid; margin: 0 0 14px; }
+.gal figure .tile { width: 100%; height: auto; }
+.gal figure .tile img { height: auto; }
+.gal figcaption { font-size: .85rem; color: var(--muted); padding: 6px 4px 0; }
+.gal figcaption a { color: var(--red); font-weight: 600; text-decoration: none; }
+.gal figcaption a:hover { text-decoration: underline; }
+.strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.strip .tile { aspect-ratio: 1; }
+.menu-item .thumb { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; }
+.menu-item.has-thumb { grid-template-columns: 76px minmax(0, 1fr) auto 64px; }
+.lb { position: fixed; inset: 0; z-index: 50; background: rgba(20,14,11,.94); display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: calc(env(safe-area-inset-top, 0px) + 56px) max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 18px) max(16px, env(safe-area-inset-left, 0px)); color: #fbf1e7; }
+.lb img { max-width: 100%; max-height: 100%; margin: auto; object-fit: contain; border-radius: 10px; align-self: center; justify-self: center; min-height: 0; }
+.lb .lb-bar { display: flex; justify-content: center; align-items: center; gap: 12px 18px; flex-wrap: wrap; padding-top: 14px; font-size: .92rem; text-align: center; }
+.lb .lb-bar a { color: #f6b49e; font-weight: 700; }
+.lb button { position: absolute; border: 0; background: rgba(255,255,255,.12); color: #fff; width: 46px; height: 46px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; }
+.lb button:hover { background: rgba(255,255,255,.22); }
+.lb .lb-x { top: calc(env(safe-area-inset-top, 0px) + 10px); right: max(12px, env(safe-area-inset-right, 0px)); }
+.lb .lb-prev { left: max(12px, env(safe-area-inset-left, 0px)); top: 50%; }
+.lb .lb-next { right: max(12px, env(safe-area-inset-right, 0px)); top: 50%; }
+.lb .lb-n { opacity: .7; font-variant-numeric: tabular-nums; }
+
 @media (max-width: 1100px) {
   .plate { width: 460px; right: -150px; }
   .hero-copy { transform: translateX(-16%); }
@@ -280,6 +324,11 @@ footer .logo { font-size: 1.15rem; }
   .plate { position: relative; right: auto; top: auto; transform: none; width: 118%; max-width: none; margin: 40px -32% -60px auto; align-self: flex-end; }
   .top .plate.small { display: none; }
   .platecap { position: relative; right: auto; bottom: auto; margin: -40px auto 28px 0; max-width: 92%; }
+  .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
+  .tile .cap { opacity: 1; transform: none; }
+  .menu-item.has-thumb { grid-template-columns: 54px minmax(0,1fr) 56px; }
+  .menu-item.has-thumb .tags { grid-row: 2; }
+  .menu-item .thumb { width: 56px; height: 56px; grid-column: 3; grid-row: 1; }
   .fgrid { grid-template-columns: minmax(0, 1fr); }
   .fcard, .fcard:nth-child(4) { grid-column: auto; }
   .prog { grid-template-columns: minmax(0, 1fr); gap: 28px; }
@@ -313,7 +362,7 @@ footer .logo { font-size: 1.15rem; }
 <div class="top">
   <nav class="wrap">
     <a class="logo" href="#">Orgie der Wijzen</a>
-    <div class="links"><a href="#recepten">Recepten</a><a href="#kooklessen">Kooklessen</a><a href="#over">Over de lessen</a><a href="#laatste">Laatste lessen</a></div>
+    <div class="links"><a href="#recepten">Recepten</a><a href="#kooklessen">Kooklessen</a><a href="#fotos">Foto's</a><a href="#over">Over de lessen</a><a href="#laatste">Laatste lessen</a></div>
   </nav>
   <header class="wrap hero" data-page="home">
     <div class="hero-copy">
@@ -323,8 +372,8 @@ footer .logo { font-size: 1.15rem; }
       <a class="btn" href="#recepten">Zoek een recept</a>
       <a class="alt" href="#kooklessen">Bekijk alle kooklessen</a>
     </div>
-    <div class="plate"><img src="img/jakobs.jpg" alt="Gebakken sint-jakobsvruchten op een bord"></div>
-    <a class="platecap" id="platecap" href="#recept-sint-jakobsvruchten-met-venkel-en-roomsaus-met-pastis"><span class="pc-k">Uit de kookles van 16 september 2026</span><span class="pc-t">Sint-jakobsvruchten met venkel en roomsaus met pastis</span><span class="pc-go" aria-hidden="true">→</span></a>
+    <div class="plate" id="plate"><img class="on" src="fotos/ladiesnight-2026-06-17/02-rivierkreeftjes.jpg" alt="Rivierkreeftjes met bleekselder en appel"></div>
+    <a class="platecap" id="platecap" href="#recept-rivierkreeftjes-bleekselder-appel-en-prei-olie"><span class="pc-k">Ladiesnight van 17 juni 2026</span><span class="pc-t">Rivierkreeftjes, bleekselder, appel en prei-olie</span><span class="pc-go" aria-hidden="true">→</span></a>
   </header>
   <div class="wrap dhead" id="dhead" data-page="detail" hidden></div>
 </div>
@@ -334,10 +383,15 @@ footer .logo { font-size: 1.15rem; }
   <div class="fgrid">
     <div class="fcard pad"><h3 id="n-rec">379 recepten</h3><p>Van aperitiefhapje tot dessert. Elk recept zoals het in de cursus stond, met ingrediënten, bereiding en tips.</p><a class="btn-ghost" href="#recepten">Zoek een recept</a></div>
     <div class="fcard pad"><h3 id="n-les">105 kooklessen</h3><p>Ongeveer één woensdagavond per maand koken we samen een volledig menu.</p><a class="btn-ghost" href="#kooklessen">Bekijk de lessen</a></div>
-    <div class="fcard"><h3>Samen koken</h3><p>Iedereen staat mee aan het fornuis, en daarna schuiven we samen aan tafel.</p><img class="pic" src="img/samen.jpg" alt="Samen koken in een keuken"></div>
-    <div class="fcard"><h3>Ladiesnight</h3><p>Eén keer per jaar is er de ladiesnight, met een feestelijk menu.</p><img class="pic" src="img/zalm.jpg" alt="Bord met zalm en een glas wijn"></div>
+    <div class="fcard"><h3>Samen koken</h3><p>Iedereen staat mee aan het fornuis, en daarna schuiven we samen aan tafel.</p><img class="pic" src="fotos/ladiesnight-2026-06-17/13-kookgroep-1-klein.jpg" alt="De kookgroep"></div>
+    <div class="fcard"><h3>Ladiesnight</h3><p>Eén keer per jaar is er de ladiesnight, met een feestelijk menu.</p><img class="pic" src="fotos/ladiesnight-2026-06-17/15-dames-1-klein.jpg" alt="De dames van de ladiesnight"></div>
     <div class="fcard pad"><h3 id="n-first">Sinds 2010</h3><p>Komt een gerecht in meerdere lessen terug? Op de receptpagina zie je in welke lessen, en of het recept toen anders was.</p></div>
   </div>
+</section>
+
+<section class="section wrap" id="inbeeld" data-page="home" hidden>
+  <div class="sec-head"><h2 id="inbeeld-t">In beeld</h2><a href="#fotos">Alle foto's</a></div>
+  <div class="mosaic" id="mosaic"></div>
 </section>
 
 <section class="section wrap" id="laatste" data-page="home">
@@ -392,6 +446,14 @@ footer .logo { font-size: 1.15rem; }
 </section>
 
 <div id="detail" data-page="detail" hidden></div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto">
+  <img id="lb-img" alt="">
+  <div class="lb-bar"><span class="lb-n" id="lb-n"></span><span id="lb-cap"></span></div>
+  <button class="lb-prev" id="lb-prev" aria-label="Vorige foto">‹</button>
+  <button class="lb-next" id="lb-next" aria-label="Volgende foto">›</button>
+  <button class="lb-x" id="lb-x" aria-label="Sluiten">×</button>
+</div>
 
 <footer><div class="wrap"><span class="logo">Orgie der Wijzen</span><span>Kooklessen sinds 2010</span></div></footer>
 
@@ -619,7 +681,10 @@ function renderRecipe(r, vi) {
     <p class="badge"><span>${esc(cl(r.course))}</span><span>${dated.length ? dated.length + (dated.length > 1 ? " lessen" : " les") : "los recept"}</span>${r.last ? `<span>laatst ${fmtDate(r.last)}</span>` : ""}</p>
     <h1>${esc(r.title)}</h1>
     ${r.intro ? `<p class="intro">${esc(r.intro)}</p>` : ""}
-    <div class="tags">${r.events.includes("Ladiesnight") ? '<span class="tagpill lady">ladiesnight</span>' : ""}${r.tags.map(t => `<span class="tagpill">${esc(t)}</span>`).join("")}</div>`;
+    <div class="tags">${r.events.includes("Ladiesnight") ? '<span class="tagpill lady">ladiesnight</span>' : ""}${r.tags.map(t => `<span class="tagpill">${esc(t)}</span>`).join("")}</div>
+    ${(PBYREC[r.id] || []).length ? `<div class="plate small"><img class="on" src="${fsrc(PBYREC[r.id][0].album, PBYREC[r.id][0])}" alt="${esc(PBYREC[r.id][0].caption)}"></div>` : ""}`;
+  const rp = PBYREC[r.id] || [];
+  const photoSec = rp.length ? `<section class="wrap" style="padding-top:48px"><div class="sec-head"><h2>Zo zag het eruit</h2></div><div class="strip">${rp.map((p, i) => tile("rec", rp, i)).join("")}</div>${rp.map(p => p.album).filter((a, i, x) => x.indexOf(a) === i).map(a => `<p class="sub" style="margin-top:12px"><a href="#album-${a.id}">Alle foto's van de ${esc(a.title.toLowerCase())} van ${fmtDate(a.date, "long").replace(/^\S+ /, "")}</a></p>`).join("")}</section>` : "";
   const lcards = dated.map(l => {
     const L = LBYKEY[lkey(l)];
     const others = L ? L.dishes.filter(d => d.r !== r) : [];
@@ -644,6 +709,7 @@ function renderRecipe(r, vi) {
       <div class="sec-head" style="margin-bottom:24px"><h2>${dated.length > 1 ? `In ${dated.length} kooklessen` : "In deze kookles"}</h2></div>
       <p class="sub">${sub}${nv > 1 ? `, in ${nv} verschillende versies. Kies hieronder welke versie je wil zien.` : "."}</p>
       <div class="lgrid">${lcards}</div>${looseNote}</div></section>` : ""}
+    ${photoSec}
     <div class="wrap dbody">${body}</div>`;
 }
 
@@ -654,17 +720,106 @@ function renderLesson(L) {
   $("#dhead").innerHTML = `<a class="back" href="#kooklessen">← Alle kooklessen</a>
     <p class="badge"><span>${esc(L.event)}</span><span>${season(L.date)}</span><span>${L.dishes.length} gerechten</span></p>
     <h1>${fmtDate(L.date, "long").replace(/^(\S+) (.*)$/, "$1 <em>$2</em>")}</h1>`;
-  $("#detail").innerHTML = `<div class="wrap dbody">
+  const al = ABYDATE[L.date];
+  const strip = al ? (() => { const ps = [al.photos.find(p => p.f === al.cover), ...al.photos.filter(p => p.kind !== "gerecht" && p.f !== al.cover)].filter(Boolean).slice(0, 6);
+    return `<section style="margin-bottom:48px"><div class="sec-head"><h2>Foto's van deze avond</h2><a href="#album-${al.id}">Alle ${al.photos.length} foto's</a></div><div class="strip">${ps.map((p, i) => tile("les", ps, i)).join("")}</div></section>`; })() : "";
+  $("#detail").innerHTML = `<div class="wrap dbody">${strip}
     <div class="sec-head"><h2>Het menu</h2></div>
     <div class="menu-list">${L.dishes.map(({r, l}, i) => {
       const otherDates = r.dated.filter(x => lkey(x) !== L.key);
-      return `<a class="menu-item" href="#recept-${r.id}">
+      const ph = al && (PBYREC[r.id] || []).find(p => p.album === al);
+      return `<a class="menu-item${ph ? " has-thumb" : ""}" href="#recept-${r.id}">
         <span class="num">${String(i+1).padStart(2,"0")}</span>
         <div><span class="course">${esc(cl(l.course))}</span><h3>${hl(l.title, T)}</h3>${otherDates.length ? `<p>Ook gemaakt op ${otherDates.map(x => fmtDate(x.date)).join(", ")}</p>` : ""}</div>
         <div class="tags">${otherDates.length ? `<span class="tagpill multi">${otherDates.length + 1} lessen</span>` : ""}${l.v == null ? '<span class="tagpill">geen recepttekst</span>' : ""}</div>
+        ${ph ? `<img class="thumb" src="${fsrc(al, ph, true)}" alt="" loading="lazy">` : ""}
       </a>`; }).join("")}</div>
     <div class="pager">${older ? `<a class="btn-ghost" href="#les-${older.key}">← ${fmtDate(older.date)}</a>` : "<span></span>"}${newer ? `<a class="btn-ghost" href="#les-${newer.key}">${fmtDate(newer.date)} →</a>` : ""}</div>
   </div>`;
+}
+
+
+/* ---------- photos ---------- */
+let ALBUMS = [], ABYID = {}, ABYDATE = {}, PBYREC = {};
+const fsrc = (a, p, small) => `fotos/${a.id}/${p.f}${small ? "-klein" : ""}.jpg`;
+function prepFotos(d) {
+  ALBUMS = (d.albums || []).sort((a, b) => b.date.localeCompare(a.date));
+  for (const a of ALBUMS) {
+    ABYID[a.id] = a; ABYDATE[a.date] = a;
+    a.photos.forEach(p => { p.album = a; if (p.recipe) (PBYREC[p.recipe] ||= []).push(p); });
+  }
+}
+const albumTitle = a => `${a.title} van ${fmtDate(a.date, "long").replace(/^\S+ /, "")}`;
+let LB = { list: [], i: 0 };
+function lbShow() {
+  const p = LB.list[LB.i], r = p.recipe && BYID[p.recipe];
+  $("#lb-img").src = fsrc(p.album, p); $("#lb-img").alt = p.caption || "";
+  $("#lb-n").textContent = `${LB.i + 1} / ${LB.list.length}`;
+  $("#lb-cap").innerHTML = esc(p.caption || "") + (r ? ` · <a href="#recept-${r.id}">Bekijk het recept</a>` : "");
+}
+function openLB(list, i) { LB = { list, i }; $("#lb").hidden = false; document.body.style.overflow = "hidden"; lbShow(); $("#lb-x").focus(); }
+function closeLB() { $("#lb").hidden = true; document.body.style.overflow = ""; }
+function stepLB(d) { LB.i = (LB.i + d + LB.list.length) % LB.list.length; lbShow(); }
+let LBSETS = {};
+function tile(set, list, i, cls = "", small = true) {
+  const p = list[i]; LBSETS[set] = list;
+  return `<button class="tile ${cls}" data-lb="${set}" data-i="${i}" aria-label="${esc(p.caption || "Foto")}"><img src="${fsrc(p.album, p, small)}" alt="${esc(p.caption || "")}" loading="lazy"><span class="cap">${esc(p.caption || "")}</span></button>`;
+}
+function renderMosaic() {
+  const a = ALBUMS[0]; if (!a) return;
+  const by = k => a.photos.filter(p => p.kind === k);
+  const cover = a.photos.find(p => p.f === a.cover) || a.photos[0];
+  const sq = p => p.w / p.h < 1.25, ls = p => p.w / p.h >= 1.2;
+  const singles = [...by("gerecht").filter(sq).slice(0, 3), ...by("sfeer").filter(sq).slice(0, 1)];
+  const wides = [...by("sfeer"), ...by("groep")].filter(p => p !== cover && ls(p)).slice(0, 2);
+  const pick = [cover, ...singles, ...wides].filter(Boolean);
+  $("#inbeeld-t").textContent = albumTitle(a) + " in beeld";
+  $("#mosaic").innerHTML = pick.map((p, i) => tile("home", pick, i, i === 0 ? "big" : i > singles.length ? "wide" : "")).join("");
+  $("#inbeeld").dataset.ready = "1";
+}
+let heroT = null;
+function startHero() {
+  const list = ALBUMS.flatMap(a => a.photos.filter(p => p.recipe && BYID[p.recipe] && p.w / p.h < 1.25));
+  if (!list.length) return;
+  const plate = $("#plate");
+  plate.innerHTML = list.map((p, i) => `<img${i === 0 ? ' class="on"' : ""} src="${fsrc(p.album, p)}" alt="${esc(p.caption)}" ${i ? 'loading="lazy"' : ""}>`).join("");
+  let i = 0;
+  const show = () => {
+    const p = list[i], r = BYID[p.recipe];
+    plate.querySelectorAll("img").forEach((im, k) => im.classList.toggle("on", k === i));
+    $("#platecap").href = "#recept-" + r.id;
+    $("#platecap .pc-k").textContent = albumTitle(p.album);
+    $("#platecap .pc-t").textContent = r.title;
+  };
+  show();
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let paused = false;
+  plate.parentElement.addEventListener("mouseenter", () => paused = true);
+  plate.parentElement.addEventListener("mouseleave", () => paused = false);
+  heroT = setInterval(() => { if (paused || document.hidden || !onHome) return; i = (i + 1) % list.length; show(); }, 5000);
+}
+function renderFotos() {
+  $("#dhead").innerHTML = `<a class="back" href="#">← Startpagina</a>
+    <p class="badge"><span>${ALBUMS.length} albums</span><span>${ALBUMS.reduce((n, a) => n + a.photos.length, 0)} foto's</span></p>
+    <h1>Foto's</h1>`;
+  $("#detail").innerHTML = `<div class="wrap dbody"><div class="albums">${ALBUMS.map(a => {
+    const c = a.photos.find(p => p.f === a.cover) || a.photos[0];
+    return `<a class="album" href="#album-${a.id}"><div class="cov"><img src="${fsrc(a, c, true)}" alt="" loading="lazy"></div>
+      <div class="meta"><span class="course">${esc(a.event)}</span><h3>${fmtDate(a.date, "long").replace(/^\S+ /, "")}</h3><p>${a.photos.length} foto's · ${a.photos.filter(p => p.kind === "gerecht").length} gerechten</p></div></a>`; }).join("")}</div></div>`;
+}
+function renderAlbum(a) {
+  const L = LBYKEY[a.date + (a.event === "Ladiesnight" ? "-ladiesnight" : "")];
+  $("#dhead").innerHTML = `<a class="back" href="#fotos">← Alle foto's</a>
+    <p class="badge"><span>${esc(a.event)}</span><span>${a.photos.length} foto's</span>${L ? `<span>${L.dishes.length} gerechten</span>` : ""}</p>
+    <h1>${fmtDate(a.date, "long").replace(/^(\S+) (.*)$/, "$1 <em>$2</em>")}</h1>
+    ${L ? `<a class="btn" href="#les-${L.key}">Bekijk het menu</a>` : ""}`;
+  const secs = [["gerecht", "Gerechten"], ["sfeer", "Sfeer"], ["groep", "Groepsfoto's"]];
+  const all = a.photos;
+  $("#detail").innerHTML = `<div class="wrap dbody">${secs.map(([k, t]) => {
+    const ps = all.filter(p => p.kind === k); if (!ps.length) return "";
+    return `<section class="gal-sec"><div class="sec-head"><h2>${t}</h2></div><div class="gal">${ps.map(p => {
+      const r = p.recipe && BYID[p.recipe];
+      return `<figure>${tile("album", all, all.indexOf(p), "", true).replace('<button class="tile ', `<button style="aspect-ratio:${p.w}/${p.h}" class="tile `)}<figcaption>${r ? `<a href="#recept-${r.id}">${esc(r.title)}</a>` : esc(p.caption || "")}</figcaption></figure>`; }).join("")}</div></section>`; }).join("")}</div>`;
 }
 
 /* ---------- router ---------- */
@@ -680,6 +835,13 @@ function route() {
     onHome = false; show("detail"); renderRecipe(BYID[m[1]], m[2] ? +m[2] : null);
     document.title = BYID[m[1]].title + " · Orgie der Wijzen"; scrollTo(0, 0); return;
   }
+  if (h === "fotos" || ((m = h.match(/^album-([a-z0-9-]+)$/)) && ABYID[m[1]])) {
+    if (onHome) homeScroll = scrollY;
+    onHome = false; show("detail");
+    if (h === "fotos") { renderFotos(); document.title = "Foto's · Orgie der Wijzen"; }
+    else { renderAlbum(ABYID[m[1]]); document.title = "Foto's " + fmtDate(ABYID[m[1]].date) + " · Orgie der Wijzen"; }
+    scrollTo(0, 0); return;
+  }
   if ((m = h.match(/^les-([0-9-]+(?:-ladiesnight)?)$/)) && LBYKEY[m[1]]) {
     if (onHome) homeScroll = scrollY;
     onHome = false; show("detail"); renderLesson(LBYKEY[m[1]]);
@@ -687,6 +849,7 @@ function route() {
   }
   const wasHome = onHome;
   onHome = true; show("home"); document.title = "Orgie der Wijzen";
+  $("#inbeeld").hidden = !$("#inbeeld").dataset.ready;
   if (h === "kooklessen") setView("lessen");
   if (h === "recepten" && wasHome === false && st.view === "lessen") {}
   renderHome();
@@ -707,6 +870,12 @@ window.addEventListener("hashchange", () => { if (location.hash !== curHash) { c
 function setView(v) { st.view = v; $("#tab-recepten").setAttribute("aria-pressed", v === "recepten"); $("#tab-lessen").setAttribute("aria-pressed", v === "lessen"); }
 
 document.addEventListener("click", e => {
+  const t = e.target.closest("[data-lb]");
+  if (t) { openLB(LBSETS[t.dataset.lb], +t.dataset.i); return; }
+  if (e.target.closest("#lb-x") || e.target.id === "lb") { closeLB(); return; }
+  if (e.target.closest("#lb-prev")) { stepLB(-1); return; }
+  if (e.target.closest("#lb-next")) { stepLB(1); return; }
+  if (e.target.closest("#lb a")) closeLB();
   const a = e.target.closest('a[href^="#"]');
   if (a && !e.metaKey && !e.ctrlKey) { e.preventDefault(); go(a.getAttribute("href") === "#" ? "" : a.getAttribute("href")); return; }
   const vb = e.target.closest("[data-ver]");
@@ -726,6 +895,7 @@ document.addEventListener("click", e => {
   if (e.target.id === "more") { st.limit += 60; renderHome(); }
 });
 document.addEventListener("keydown", e => {
+  if (!$("#lb").hidden) { if (e.key === "Escape") closeLB(); if (e.key === "ArrowLeft") stepLB(-1); if (e.key === "ArrowRight") stepLB(1); return; }
   if (e.key === "/" && onHome && document.activeElement !== $("#q")) { e.preventDefault(); $("#q").focus(); }
 });
 let tmr; $("#q").addEventListener("input", e => { clearTimeout(tmr); tmr = setTimeout(() => { st.q = e.target.value; st.limit = 60; renderHome(true); }, 160); });
@@ -736,14 +906,18 @@ const closeFilters = () => { $("#filters").classList.remove("open"); $("#ftoggle
 $("#fclose").addEventListener("click", closeFilters);
 $("#fapply").addEventListener("click", () => { closeFilters(); $("#recepten .bar").scrollIntoView(); });
 for (const v of ["recepten","lessen"]) $("#tab-" + v).addEventListener("click", () => { setView(v); renderHome(); });
+let tx = null;
+$("#lb").addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+$("#lb").addEventListener("touchend", e => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) stepLB(dx < 0 ? 1 : -1); tx = null; });
 $("#ftoggle").addEventListener("click", () => { $("#filters").classList.add("open"); $("#ftoggle").setAttribute("aria-expanded", true); document.body.style.overflow = "hidden"; });
 
-fetch("recipes.json").then(r => r.json()).then(data => {
+Promise.all([fetch("recipes.json").then(r => r.json()), fetch("fotos.json").then(r => r.ok ? r.json() : { albums: [] }).catch(() => ({ albums: [] }))]).then(([data, fotos]) => {
   R = data.map(prep);
+  prepFotos(fotos);
   buildLessons();
   const years = LESSONS.map(L => +L.date.slice(0,4));
-  const hero = BYID["sint-jakobsvruchten-met-venkel-en-roomsaus-met-pastis"];
-  if (hero && hero.last) $("#platecap .pc-k").textContent = "Uit de kookles van " + fmtDate(hero.last, "long").replace(/^\S+ /, "");
+  renderMosaic();
+  startHero();
   $("#n-rec").textContent = R.length + " recepten";
   $("#n-les").textContent = LESSONS.length + " kooklessen";
   $("#n-first").textContent = "Sinds " + Math.min(...years);

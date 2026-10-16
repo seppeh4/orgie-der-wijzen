@@ -1,0 +1,250 @@
+{
+ "albums": [
+  {
+   "id": "ladiesnight-2026-06-17",
+   "date": "2026-06-17",
+   "event": "Ladiesnight",
+   "title": "Ladiesnight",
+   "cover": "11-iedereen-1",
+   "photos": [
+    {
+     "f": "01-voorgerecht-duo",
+     "w": 720,
+     "h": 380,
+     "kind": "gerecht",
+     "caption": "Voorgerecht: rivierkreeftjes met bleekselder en appel",
+     "recipe": "rivierkreeftjes-bleekselder-appel-en-prei-olie"
+    },
+    {
+     "f": "02-rivierkreeftjes",
+     "w": 576,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Rivierkreeftjes, bleekselder, appel en prei-olie",
+     "recipe": "rivierkreeftjes-bleekselder-appel-en-prei-olie"
+    },
+    {
+     "f": "03-voorgerecht-zalm",
+     "w": 563,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Voorgerecht"
+    },
+    {
+     "f": "04-scampi-diabolique",
+     "w": 720,
+     "h": 716,
+     "kind": "gerecht",
+     "caption": "Scampi diabolique",
+     "recipe": "scampi-diabolique"
+    },
+    {
+     "f": "05-chocolade-ijs",
+     "w": 653,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Chocolade-ijs met rode vruchtencoulis & knettersuiker",
+     "recipe": "chocolade-ijs-met-rode-vruchtencoulis-knettersuiker"
+    },
+    {
+     "f": "06-bloemen",
+     "w": 515,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Veldbloemen op tafel"
+    },
+    {
+     "f": "07-aan-tafel",
+     "w": 653,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
+    },
+    {
+     "f": "08-aan-tafel-2",
+     "w": 720,
+     "h": 588,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
+    },
+    {
+     "f": "09-woordje-uitleg",
+     "w": 540,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Een woordje uitleg"
+    },
+    {
+     "f": "10-het-dessert",
+     "w": 580,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Het dessert valt in de smaak"
+    },
+    {
+     "f": "11-iedereen-1",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "Iedereen samen"
+    },
+    {
+     "f": "12-iedereen-2",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "Iedereen samen"
+    },
+    {
+     "f": "13-kookgroep-1",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "De kookgroep"
+    },
+    {
+     "f": "14-kookgroep-2",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "De kookgroep"
+    },
+    {
+     "f": "15-dames-1",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "De dames van de ladiesnight"
+    },
+    {
+     "f": "16-dames-2",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "De dames van de ladiesnight"
+    },
+    {
+     "f": "17-dames-3",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "De dames van de ladiesnight"
+    },
+    {
+     "f": "18-dames-4",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "De dames van de ladiesnight"
+    },
+    {
+     "f": "19-dames-5",
+     "w": 720,
+     "h": 540,
+     "kind": "groep",
+     "caption": "De dames van de ladiesnight"
+    }
+   ]
+  },
+  {
+   "id": "ladiesnight-2025-04-16",
+   "date": "2025-04-16",
+   "event": "Ladiesnight",
+   "title": "Ladiesnight",
+   "cover": "11-de-zaal",
+   "photos": [
+    {
+     "f": "01-gedekte-tafel",
+     "w": 540,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "De gedekte tafel"
+    },
+    {
+     "f": "02-asperge-aardappelsoep",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Asperge-aardappelsoep met peterselie-olie",
+     "recipe": "asperge-aardappelsoep-peterselie-olie-rivierpaling"
+    },
+    {
+     "f": "03-vitello-tonnato",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Vitello tonnato op zijn kop",
+     "recipe": "vitello-tonnato-op-zijn-kop"
+    },
+    {
+     "f": "04-kroket-kroepoek",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Kroket, kroepoek en pickles",
+     "recipe": "kroket-kroepoek-pickels"
+    },
+    {
+     "f": "05-ratte-patat",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Geprakte ratte patat met grijze garnalen en gepocheerd ei",
+     "recipe": "geprakte-ratte-patat-met-botermelk-gerookte-boter-grijze-garnalen-en-g"
+    },
+    {
+     "f": "06-inktvis-spaghetti",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Inktvis-spaghetti met sint-jacobsvrucht en kaviaar",
+     "recipe": "inktvis-spaghetti-inktvissliertjes-sint-jacobsvruchten-kaviaar"
+    },
+    {
+     "f": "07-cote-a-los",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Côte à l’os met asperges en kruidenmousseline",
+     "recipe": "cote-a-los-junior-beef-asperges-mousseline-met-verse-tuinkruiden-en-su"
+    },
+    {
+     "f": "08-billes-de-baba",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Billes de baba in Banyuls-siroop met rood fruit",
+     "recipe": "billes-de-baba-in-banyuls-siroop-rood-fruit"
+    },
+    {
+     "f": "09-narcissen",
+     "w": 540,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Narcissen op tafel"
+    },
+    {
+     "f": "10-aan-tafel",
+     "w": 720,
+     "h": 540,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
+    },
+    {
+     "f": "11-de-zaal",
+     "w": 720,
+     "h": 540,
+     "kind": "sfeer",
+     "caption": "Iedereen aan tafel"
+    },
+    {
+     "f": "12-woordje-uitleg",
+     "w": 540,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Een woordje uitleg bij het dessert"
+    }
+   ]
+  }
+ ]
+}
