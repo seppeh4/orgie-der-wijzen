@@ -31,12 +31,44 @@
      "caption": "Voorgerecht"
     },
     {
+     "f": "20-tonijnsalade",
+     "w": 661,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Salade van gebakken tonijn met witte asperges, sugar snaps en Parmezaanse kaas",
+     "recipe": "salade-van-gebakken-tonijn-met-witte-asperges-sugar-snaps-en-parmezaan"
+    },
+    {
      "f": "04-scampi-diabolique",
      "w": 720,
      "h": 716,
      "kind": "gerecht",
      "caption": "Scampi diabolique",
      "recipe": "scampi-diabolique"
+    },
+    {
+     "f": "21-dumplings",
+     "w": 633,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Dumplings met lamsgehakt en venkelzaad & groene saus",
+     "recipe": "dumplings-met-lamsgehakt-en-venkelzaad-groene-saus"
+    },
+    {
+     "f": "22-zeetong",
+     "w": 720,
+     "h": 612,
+     "kind": "gerecht",
+     "caption": "Zeetong met lauwe tomatensalsa, lookpuree en beurre blanc",
+     "recipe": "zeetong-met-lauwe-tomatensalsa-lookpuree-beurre-blanc-en-roze-peper"
+    },
+    {
+     "f": "23-rabarbertaartje",
+     "w": 720,
+     "h": 680,
+     "kind": "gerecht",
+     "caption": "Rabarbertaartje met mascarpone room en gemarineerde aardbeien",
+     "recipe": "rabarbertaartje-met-mascarpone-room-en-gemarineerde-aardbeien"
     },
     {
      "f": "05-chocolade-ijs",
@@ -80,6 +112,48 @@
      "h": 720,
      "kind": "sfeer",
      "caption": "Het dessert valt in de smaak"
+    },
+    {
+     "f": "24-servet",
+     "w": 511,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "De tafel klaar voor de dames"
+    },
+    {
+     "f": "25-aan-tafel-3",
+     "w": 690,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
+    },
+    {
+     "f": "26-aan-tafel-4",
+     "w": 598,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "De dumplings worden opgediend"
+    },
+    {
+     "f": "27-aan-tafel-5",
+     "w": 609,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
+    },
+    {
+     "f": "28-aan-tafel-6",
+     "w": 622,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
+    },
+    {
+     "f": "29-aan-tafel-7",
+     "w": 636,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
     },
     {
      "f": "11-iedereen-1",
