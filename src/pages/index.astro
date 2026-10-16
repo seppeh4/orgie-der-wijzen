@@ -1,15 +1,17 @@
+---
+// Orgie der Wijzen: de hele site is één pagina; recepten komen uit /recipes.json
+---
 <!doctype html>
 <html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style is:global>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Orgie der Wijzen</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap">
-<style>
+<style is:global>
 /* Layout: culinary-school landing — brick-red hero with round plate cropped at the right edge → white page with rounded beige cards, red serif section titles, big numbered lists. Detail pages: brick header → beige lesson cards → recipe. */
 :root {
   --brick: #a3412b;       /* hero + headers, both themes */
@@ -393,7 +395,7 @@ footer .logo { font-size: 1.15rem; }
 
 <footer><div class="wrap"><span class="logo">Orgie der Wijzen</span><span>Kooklessen sinds 2010</span></div></footer>
 
-<script>
+<script is:inline>
 const COURSES = [
   ["aperitiefhapje","Aperitiefhapje"],["voorgerecht","Voorgerecht"],["soep","Soep"],["tussengerecht","Tussengerecht"],
   ["hoofdgerecht","Hoofdgerecht"],["bijgerecht","Bijgerecht"],["dessert","Dessert"],["saus-basis","Saus & basis"],["drank","Drank"]];

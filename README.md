@@ -1,11 +1,16 @@
 # Orgie der Wijzen
 
-Dev version of the recipe archive for the Orgie der Wijzen cooking classes (since 2010).
+Receptenarchief van de Orgie der Wijzen kooklessen (sinds 2010). Gebouwd met [Astro](https://astro.build) en gehost op Cloudflare Pages: https://orgie-der-wijzen.pages.dev
 
-- `index.html`: the whole site (search, filters, recipe and lesson pages)
-- `recipes.json`: all recipes, linked to the lessons they were made in
-- `img/`: free stock photos from Unsplash
+- `src/pages/index.astro`: de hele site (zoeken, filters, recept- en lespagina's)
+- `public/recipes.json`: alle recepten, gekoppeld aan de lessen waarin ze gemaakt werden
+- `public/img/`: stockfoto's van Unsplash
 
-Run locally with any static server, for example:
+## Lokaal ontwikkelen
 
-    python3 -m http.server 8000
+```bash
+npm install
+npm run dev        # site op http://localhost:4321
+npm run build      # bouwt naar dist/
+npm run deploy     # bouwt en zet online op Cloudflare Pages
+```

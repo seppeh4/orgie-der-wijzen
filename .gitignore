@@ -1,2 +1,6 @@
-recipes-met-bronnen.json
+node_modules/
+dist/
+.astro/
+.wrangler/
 .DS_Store
+recipes-met-bronnen.json
