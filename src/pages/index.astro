@@ -908,10 +908,13 @@ function setPers(r, vi, o) { const all = LS.get("odw-pers", {}); all[pkey(r.id, 
 const stepper = (id, val, dis) => `<div class="stepper"><button type="button" data-step="${id}" data-d="-1" aria-label="Minder" ${dis ? "disabled" : ""}>−</button><input id="${id}" type="number" min="1" max="200" inputmode="numeric" placeholder="?" value="${val ?? ""}" ${dis ? "disabled" : ""} aria-label="${id === "p-base" ? "Recept voor aantal personen" : "Koken voor aantal personen"}"><button type="button" data-step="${id}" data-d="1" aria-label="Meer" ${dis ? "disabled" : ""}>+</button></div>`;
 function persHtml(r, vi) {
   const p = getPers(r, vi);
+  if (!p.base) return `<div class="pers" id="pers">
+    <div class="prow"><span>Voor hoeveel personen is dit recept?</span><span style="display:inline-flex;gap:8px;align-items:center">${stepper("p-base", 4)}<button type="button" class="btn-ghost" id="p-ok">OK</button></span></div>
+    <p class="phint">Het recept vermeldt het niet. Vul het één keer in, dan kan je de hoeveelheden omrekenen.</p>
+  </div>`;
   return `<div class="pers" id="pers">
-    <div class="prow"><span>Recept voor</span>${stepper("p-base", p.base)}</div>
-    <div class="prow"><span>Ik kook voor</span>${stepper("p-people", p.people, !p.base)}</div>
-    ${p.stated ? "" : `<p class="phint" id="p-hint">${p.base ? "Aantal personen zelf ingevuld." : "Het recept vermeldt niet voor hoeveel personen het is. Vul het in, dan rekenen we de hoeveelheden om."}</p>`}
+    <div class="prow"><span>Personen</span>${stepper("p-people", p.people)}</div>
+    <p class="phint">Het recept is voor ${p.base} ${p.base === 1 ? "persoon" : "personen"}${p.stated ? "" : ` (zelf ingevuld · <button type="button" class="xbtn" id="p-reset">wijzigen</button>)`}.</p>
   </div>`;
 }
 let CUR = null;
@@ -930,19 +933,17 @@ function renderIng() {
   b.textContent = onList ? `Op je lijst (voor ${p.people ?? "?"} pers.) · bijwerken` : `Zet op boodschappenlijst${p.people ? ` (${p.people} pers.)` : ""}`;
 }
 function syncPers() {
-  if (!CUR) return;
+  if (!CUR || !$("#pers")) return;
   const { r, vi } = CUR, p = getPers(r, vi);
-  const pi = $("#p-people"), dis = !p.base;
-  pi.disabled = dis; pi.value = p.people ?? "";
-  document.querySelectorAll('[data-step="p-people"]').forEach(b => b.disabled = dis);
-  const h = $("#p-hint"); if (h) h.textContent = p.base ? "Aantal personen zelf ingevuld." : "Het recept vermeldt niet voor hoeveel personen het is. Vul het in, dan rekenen we de hoeveelheden om.";
+  if (p.base && $("#p-people")) $("#p-people").value = p.people ?? "";
+  else $("#pers").outerHTML = persHtml(r, vi);
   renderIng();
 }
 function persChange(id, val) {
   if (!CUR) return;
   const { r, vi } = CUR, p = getPers(r, vi);
   val = Math.max(1, Math.min(200, Math.round(val) || 0)) || null;
-  if (id === "p-base") { setPers(r, vi, { base: val, people: p.people && p.base ? p.people : val }); $("#p-base").value = val ?? ""; }
+  if (id === "p-base") { setPers(r, vi, { base: val, people: val }); $("#pers").outerHTML = persHtml(r, vi); renderIng(); return; }
   else setPers(r, vi, { people: val });
   syncPers();
 }
@@ -1044,8 +1045,11 @@ document.addEventListener("click", e => {
   if (st_) { const inp = $("#" + st_.dataset.step); const cur = +inp.value || (st_.dataset.step.startsWith("s-") ? 1 : 0);
     const nv = Math.max(1, cur + +st_.dataset.d || 1);
     if (st_.dataset.step.startsWith("s-")) { const k = +st_.dataset.step.slice(2), l = shopList(); l.items[k].people = Math.max(1, (l.items[k].people || 1) + +st_.dataset.d); saveList(l); renderShop(); }
+    else if (st_.dataset.step === "p-base") inp.value = nv;
     else persChange(st_.dataset.step, cur ? nv : (+st_.dataset.d > 0 ? 4 : 1));
     return; }
+  if (e.target.closest("#p-ok")) { persChange("p-base", +$("#p-base").value); return; }
+  if (e.target.closest("#p-reset")) { const { r, vi } = CUR; setPers(r, vi, { base: null, people: null }); $("#pers").outerHTML = persHtml(r, vi); renderIng(); return; }
   if (e.target.closest("#add-list")) { const { r, vi } = CUR, p = getPers(r, vi); addToList(r, vi, p.people, p.base); renderIng(); return; }
   const ma = e.target.closest("#menu-add");
   if (ma) { const L = LBYKEY[ma.dataset.key]; let n = 0;
@@ -1087,6 +1091,7 @@ document.addEventListener("click", e => {
   if (e.target.id === "more") { st.limit += 60; renderHome(); }
 });
 document.addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.id === "p-base") { persChange("p-base", +e.target.value); return; }
   if (!$("#lb").hidden) { if (e.key === "Escape") closeLB(); if (e.key === "ArrowLeft") stepLB(-1); if (e.key === "ArrowRight") stepLB(1); return; }
   if (e.key === "/" && onHome && document.activeElement !== $("#q")) { e.preventDefault(); $("#q").focus(); }
 });
@@ -1096,7 +1101,7 @@ $("#reset").addEventListener("click", () => { FKEYS.forEach(k => st[k].clear());
 document.addEventListener("change", e => {
   const c = e.target.closest("[data-chk]");
   if (c) { const l = shopList(); if (c.checked) l.checked[c.dataset.chk] = true; else delete l.checked[c.dataset.chk]; saveList(l); return; }
-  if (e.target.id === "p-base" || e.target.id === "p-people") { persChange(e.target.id, +e.target.value); return; }
+  if (e.target.id === "p-people") { persChange(e.target.id, +e.target.value); return; }
   const sp = e.target.id && e.target.id.match(/^s-(\d+)$/);
   if (sp) { const l = shopList(); l.items[+sp[1]].people = Math.max(1, Math.round(+e.target.value) || 1); saveList(l); renderShop(); }
 });
