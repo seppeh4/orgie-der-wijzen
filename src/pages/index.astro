@@ -217,7 +217,11 @@ aside { align-self: start; padding-bottom: 12px; }
 .dhead .intro { font-style: italic; opacity: .85; max-width: 60ch; margin: 0 0 18px; }
 .dhead .tagpill { border-color: rgba(251,241,231,.4); color: var(--on-brick); background: transparent; }
 .dhead .tagpill.lady { background: var(--coral); border-color: var(--coral); }
-.top .plate.small { width: 380px; right: -110px; opacity: .95; }
+.top .plate.small { width: 380px; right: -110px; opacity: .95; border: 0; padding: 0; cursor: zoom-in; display: block; }
+.plate .pcount { position: absolute; left: 50%; bottom: 14%; transform: translateX(-60%); background: color-mix(in srgb, #1d1613 70%, transparent); color: #fbf1e7; font-size: .78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; z-index: 2; }
+.dhead.nophoto h1, .dhead.nophoto .intro { max-width: none; }
+.dhead.hasphoto > :not(.plate) { max-width: calc(100% - 300px); }
+.lessons-band.after .wrap { padding-block: 8px 96px; }
 
 .lessons-band .wrap { padding-block: 64px 8px; }
 .lessons-band .sub { margin: -16px 0 24px; font-size: .95rem; color: var(--muted); max-width: 62ch; }
@@ -360,7 +364,8 @@ nav .navr { display: flex; align-items: center; gap: 26px; }
   .hero { padding-block: 8px 0; min-height: 0; display: flex; flex-direction: column; }
   .hero-copy { transform: none; }
   .plate { position: relative; right: auto; top: auto; transform: none; width: 118%; max-width: none; margin: 40px -32% -60px auto; align-self: flex-end; }
-  .top .plate.small { display: none; }
+  .top .plate.small { position: relative; right: auto; top: auto; transform: none; width: 220px; margin: 22px 0 0; }
+  .dhead.hasphoto > :not(.plate) { max-width: none; }
   .platecap { position: relative; right: auto; bottom: auto; margin: -40px auto 28px 0; max-width: 92%; }
   .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
   .cart span { display: none; }
@@ -723,9 +728,9 @@ function renderRecipe(r, vi) {
     ${r.intro ? `<p class="intro">${esc(r.intro)}</p>` : ""}
     ${r.credit ? `<p class="intro">${esc(r.credit)}</p>` : ""}
     <div class="tags">${r.events.includes("Ladiesnight") ? '<span class="tagpill lady">ladiesnight</span>' : ""}${r.tags.map(t => `<span class="tagpill">${esc(t)}</span>`).join("")}</div>
-    ${(PBYREC[r.id] || []).length ? `<div class="plate small"><img class="on" src="${fsrc(PBYREC[r.id][0].album, PBYREC[r.id][0])}" alt="${esc(PBYREC[r.id][0].caption)}"></div>` : ""}`;
+    ${(PBYREC[r.id] || []).length ? (() => { const rp0 = PBYREC[r.id]; LBSETS.rec = rp0; return `<button class="plate small" data-lb="rec" data-i="0" aria-label="Bekijk de foto${rp0.length > 1 ? "'s" : ""} van dit gerecht"><img class="on" src="${fsrc(rp0[0].album, rp0[0])}" alt="${esc(rp0[0].caption)}">${rp0.length > 1 ? `<span class="pcount">${rp0.length} foto's</span>` : ""}</button>`; })() : ""}`;
   const rp = PBYREC[r.id] || [];
-  const photoSec = rp.length ? `<section class="wrap" style="padding-top:48px"><div class="sec-head"><h2>Zo zag het eruit</h2></div><div class="strip">${rp.map((p, i) => tile("rec", rp, i)).join("")}</div>${rp.map(p => p.album).filter((a, i, x) => x.indexOf(a) === i).map(a => `<p class="sub" style="margin-top:12px"><a href="#album-${a.id}">Alle foto's van de ${esc(a.title.toLowerCase())} van ${fmtDate(a.date, "long").replace(/^\S+ /, "")}</a></p>`).join("")}</section>` : "";
+  $("#dhead").classList.add(rp.length ? "hasphoto" : "nophoto");
   const lcards = dated.map(l => {
     const L = LBYKEY[lkey(l)];
     const others = L ? L.dishes.filter(d => d.r !== r) : [];
@@ -737,7 +742,7 @@ function renderRecipe(r, vi) {
         ${nv > 1 && l.v != null ? `<span class="vtag">versie ${vLetter(l.v)}</span>` : ""}${l.v == null ? `<span class="vtag">geen uitgeschreven recept</span>` : ""}</div>
       ${norm(l.title) !== norm(r.title) ? `<p class="asname">Op het menu als “${esc(l.title)}”</p>` : ""}
       ${others.length && dated.length === 1 ? `<ul><li class="label" style="margin:0">Ook op het menu</li>${others.slice(0, 5).map(o => `<li><span class="course">${esc(cl(o.l.course))}</span><a href="#recept-${o.r.id}">${esc(o.l.title)}</a></li>`).join("")}${others.length > 5 ? `<li><a href="#les-${lkey(l)}">+ ${others.length - 5} meer gerechten</a></li>` : ""}</ul>` : ""}
-      <div class="actions"><a class="btn-ghost" href="#les-${lkey(l)}">Bekijk deze les</a>${nv > 1 && l.v != null && l.v !== vi ? `<button class="btn-ghost" data-ver="${l.v}">Toon versie ${vLetter(l.v)}</button>` : ""}</div>
+      <div class="actions"><a class="btn-ghost" href="#les-${lkey(l)}">Bekijk deze les</a>${ABYDATE[l.date] ? `<a class="btn-ghost" href="#album-${ABYDATE[l.date].id}">Foto's</a>` : ""}${nv > 1 && l.v != null && l.v !== vi ? `<button class="btn-ghost" data-ver="${l.v}">Toon versie ${vLetter(l.v)}</button>` : ""}</div>
     </article>`;
   }).join("");
   const looseNote = "";
@@ -746,12 +751,11 @@ function renderRecipe(r, vi) {
       return `<button class="chip" data-ver="${i}" aria-pressed="${i === vi}">${vLetter(i)} · ${esc(when)}</button>`; }).join("")}</div>` : "";
   const body = r.cookbook ? `<p class="note">Dit recept komt uit een kookboek dat in de les gebruikt werd.</p>`
     : nv ? vsw + versionHtml(r.versions[vi], T, r, vi) : `<p class="note">Dit gerecht stond op het menu, maar het recept zit niet in het document.</p>`;
-  $("#detail").innerHTML = `${dated.length ? `<section class="band lessons-band"><div class="wrap">
+  $("#detail").innerHTML = `<div class="wrap dbody">${body}</div>
+    ${dated.length ? `<section class="band lessons-band after"><div class="wrap">
       <div class="sec-head" style="margin-bottom:24px"><h2>${dated.length > 1 ? `In ${dated.length} kooklessen` : "In deze kookles"}</h2></div>
       <p class="sub">${sub}${nv > 1 ? `, in ${nv} verschillende versies. Kies hieronder welke versie je wil zien.` : "."}</p>
-      <div class="lgrid">${lcards}</div>${looseNote}</div></section>` : ""}
-    ${photoSec}
-    <div class="wrap dbody">${body}</div>`;
+      <div class="lgrid">${lcards}</div>${looseNote}</div></section>` : ""}`;
   CUR = { r, vi };
   if ($("#ing-list")) renderIng();
 }
@@ -990,6 +994,7 @@ function show(page) {
 }
 function route() {
   const h = curHash.replace(/^#/, "");
+  $("#dhead").className = "wrap dhead";
   let m;
   if ((m = h.match(/^recept-([a-z0-9-]+?)(?:~v(\d+))?$/)) && BYID[m[1]]) {
     if (onHome) homeScroll = scrollY;
