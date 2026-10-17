@@ -319,6 +319,85 @@
      "caption": "Een woordje uitleg bij het dessert"
     }
    ]
+  },
+  {
+   "id": "ladiesnight-2022-06-15",
+   "date": "2022-06-15",
+   "event": "Ladiesnight",
+   "title": "Ladiesnight",
+   "cover": "06-surf-turf",
+   "photos": [
+    {
+     "f": "01-krab",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Krab, curry en venkel",
+     "recipe": "krab-curry-venkel"
+    },
+    {
+     "f": "02-gazpacho",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Gazpacho",
+     "recipe": "gazpacho"
+    },
+    {
+     "f": "03-filopie",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Filopie met kaas",
+     "recipe": "filopie-met-kaas"
+    },
+    {
+     "f": "04-asperges-zalm",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Asperges met gerookte zalm, kruidensaus en aardappeltje",
+     "recipe": "asperges-met-gerookte-zalm-kruidensaus-aardappeltje-met-zure-room"
+    },
+    {
+     "f": "05-rivierpaling",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Gestoofde prei met gegrilde, gerookte rivierpaling",
+     "recipe": "gestoofde-prei-met-gegrilde-gerookte-rivierpaling"
+    },
+    {
+     "f": "06-surf-turf",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Surf & turf: spek, langoestine, zoete aardappel en knolselder",
+     "recipe": "surf-turf-spek-traaggegaard-langoestine-zoete-aardappel-knolselder"
+    },
+    {
+     "f": "07-aardbeien-limoensorbet",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Aardbeien met verse munt en limoensorbet",
+     "recipe": "aardbeien-met-verse-munt-en-limoensorbet"
+    },
+    {
+     "f": "08-rabarbertaart",
+     "w": 540,
+     "h": 720,
+     "kind": "gerecht",
+     "caption": "Rabarbertaart"
+    },
+    {
+     "f": "09-aan-tafel",
+     "w": 540,
+     "h": 720,
+     "kind": "sfeer",
+     "caption": "Aan tafel"
+    }
+   ]
   }
  ]
 }
