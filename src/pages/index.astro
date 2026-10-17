@@ -313,6 +313,44 @@ footer .logo { font-size: 1.15rem; }
 .lb .lb-next { right: max(12px, env(safe-area-inset-right, 0px)); top: 50%; }
 .lb .lb-n { opacity: .7; font-variant-numeric: tabular-nums; }
 
+
+/* People + shopping list */
+.pers { display: flex; flex-direction: column; gap: 8px; padding: 2px 0 16px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+.prow { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: .88rem; font-weight: 600; }
+.stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; background: var(--bg); flex: none; }
+.stepper button { border: 0; background: none; width: 34px; height: 34px; font-size: 1.15rem; line-height: 1; cursor: pointer; color: var(--red); border-radius: 50%; }
+.stepper button:disabled { color: var(--muted); opacity: .4; cursor: default; }
+.stepper input { width: 46px; text-align: center; border: 0; background: none; font-weight: 700; font-size: 1rem; color: var(--ink); -moz-appearance: textfield; appearance: textfield; padding: 0; }
+.stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.stepper input:disabled { opacity: .5; }
+.phint { margin: 0; font-size: .8rem; color: var(--muted); font-weight: 400; }
+.ing li.scaled { color: var(--ink); }
+.ing li .q { font-weight: 700; color: var(--red); }
+.addl { width: 100%; margin-top: 18px; }
+.addl.done { background: var(--ink); }
+.cart { display: inline-flex; align-items: center; gap: 7px; color: var(--on-brick); text-decoration: none; font-weight: 600; font-size: .88rem; border: 1.5px solid rgba(251,241,231,.45); border-radius: 999px; padding: 7px 14px; flex: none; }
+.cart:hover { background: rgba(251,241,231,.12); }
+.cart b { background: var(--coral); color: #fff8f2; border-radius: 999px; font-size: .72rem; padding: 0 7px; line-height: 1.6; }
+.cart svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+nav .navr { display: flex; align-items: center; gap: 26px; }
+.shop-tools { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; align-items: center; }
+.shop-tools .note { font-size: .88rem; }
+.shop { background: var(--card); border-radius: 22px; padding: 22px 24px; margin-bottom: 16px; }
+.shop-h { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 16px; margin-bottom: 8px; }
+.shop-h h3 { font-family: var(--f-display); font-weight: 600; font-size: 1.35rem; margin: 0; line-height: 1.2; }
+.shop-h h3 a { text-decoration: none; }
+.shop-h h3 a:hover { color: var(--red); }
+.shop-h .ctl { display: flex; align-items: center; gap: 12px; font-size: .85rem; font-weight: 600; flex-wrap: wrap; }
+.shop h5 { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 12px 0 2px; }
+.shop ul { list-style: none; margin: 0; padding: 0; columns: 2 260px; column-gap: 28px; }
+.shop li { break-inside: avoid; }
+.shop label { display: flex; gap: 10px; align-items: flex-start; padding: 5px 0; cursor: pointer; font-size: .93rem; }
+.shop input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--red); margin-top: 2px; flex: none; }
+.shop input:checked + span { text-decoration: line-through; color: var(--muted); }
+.shop .warn { font-size: .8rem; color: var(--muted); margin: 0 0 6px; }
+.xbtn { border: 0; background: none; color: var(--muted); cursor: pointer; font-size: .85rem; text-decoration: underline; padding: 0; }
+.xbtn:hover { color: var(--red); }
+
 @media (max-width: 1100px) {
   .plate { width: 460px; right: -150px; }
   .hero-copy { transform: translateX(-16%); }
@@ -325,6 +363,7 @@ footer .logo { font-size: 1.15rem; }
   .top .plate.small { display: none; }
   .platecap { position: relative; right: auto; bottom: auto; margin: -40px auto 28px 0; max-width: 92%; }
   .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
+  .cart span { display: none; }
   .tile .cap { opacity: 1; transform: none; }
   .menu-item.has-thumb { grid-template-columns: 54px minmax(0,1fr) 56px; }
   .menu-item.has-thumb .tags { grid-row: 2; }
@@ -362,7 +401,8 @@ footer .logo { font-size: 1.15rem; }
 <div class="top">
   <nav class="wrap">
     <a class="logo" href="#">Orgie der Wijzen</a>
-    <div class="links"><a href="#recepten">Recepten</a><a href="#kooklessen">Kooklessen</a><a href="#fotos">Foto's</a><a href="#over">Over de lessen</a><a href="#laatste">Laatste lessen</a></div>
+    <div class="navr"><div class="links"><a href="#recepten">Recepten</a><a href="#kooklessen">Kooklessen</a><a href="#fotos">Foto's</a><a href="#over">Over de lessen</a><a href="#laatste">Laatste lessen</a></div>
+    <a class="cart" href="#boodschappen" aria-label="Boodschappenlijst"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Boodschappen</span><b id="cart-n" hidden></b></a></div>
   </nav>
   <header class="wrap hero" data-page="home">
     <div class="hero-copy">
@@ -659,12 +699,12 @@ function renderHome(fade) {
 }
 
 /* ---------- recipe page ---------- */
-function versionHtml(v, T) {
+function versionHtml(v, T, r, vi) {
   let lastG = null;
   const ing = (v.ingredients||[]).map(g => `${g.group ? `<h5>${esc(g.group)}</h5>` : ""}<ul>${(g.items||[]).map(i => `<li>${hl(i, T)}</li>`).join("")}</ul>`).join("");
   const steps = (v.steps||[]).map(s => { const h = s.group && s.group !== lastG ? `<h5>${esc(s.group)}</h5>` : ""; lastG = s.group; return h + `<p>${hl(s.text, T)}</p>`; }).join("");
   return `<div class="cols">
-    <div class="ing"><h3>Ingrediënten${v.servings ? ` <small>${esc(v.servings)}</small>` : ""}</h3>${ing || '<p class="note">Geen ingrediëntenlijst in het document.</p>'}</div>
+    <div class="ing"><h3>Ingrediënten${v.servings ? ` <small>${esc(v.servings)}</small>` : ""}</h3>${ing ? `${persHtml(r, vi)}<div id="ing-list"></div><button class="btn addl" id="add-list"></button>` : '<p class="note">Geen ingrediëntenlijst in het document.</p>'}</div>
     <div class="steps"><h3>Bereiding</h3>${steps || '<p class="note">Geen bereiding in het document.</p>'}
       ${(v.tips||[]).length ? `<div class="tipbox"><h3>Tips</h3>${v.tips.map(t => `<p>${esc(t)}</p>`).join("")}</div>` : ""}
       ${v.wine ? `<div class="tipbox"><h3>Wijn</h3><p>${esc(v.wine)}</p></div>` : ""}
@@ -705,13 +745,15 @@ function renderRecipe(r, vi) {
       const when = r.lessons.filter(l => l.v === i).map(l => l.date ? fmtDate(l.date) : "los recept").join(", ");
       return `<button class="chip" data-ver="${i}" aria-pressed="${i === vi}">${vLetter(i)} · ${esc(when)}</button>`; }).join("")}</div>` : "";
   const body = r.cookbook ? `<p class="note">Dit recept komt uit een kookboek dat in de les gebruikt werd.</p>`
-    : nv ? vsw + versionHtml(r.versions[vi], T) : `<p class="note">Dit gerecht stond op het menu, maar het recept zit niet in het document.</p>`;
+    : nv ? vsw + versionHtml(r.versions[vi], T, r, vi) : `<p class="note">Dit gerecht stond op het menu, maar het recept zit niet in het document.</p>`;
   $("#detail").innerHTML = `${dated.length ? `<section class="band lessons-band"><div class="wrap">
       <div class="sec-head" style="margin-bottom:24px"><h2>${dated.length > 1 ? `In ${dated.length} kooklessen` : "In deze kookles"}</h2></div>
       <p class="sub">${sub}${nv > 1 ? `, in ${nv} verschillende versies. Kies hieronder welke versie je wil zien.` : "."}</p>
       <div class="lgrid">${lcards}</div>${looseNote}</div></section>` : ""}
     ${photoSec}
     <div class="wrap dbody">${body}</div>`;
+  CUR = { r, vi };
+  if ($("#ing-list")) renderIng();
 }
 
 /* ---------- lesson page ---------- */
@@ -725,7 +767,7 @@ function renderLesson(L) {
   const strip = al ? (() => { const ps = [al.photos.find(p => p.f === al.cover), ...al.photos.filter(p => p.kind !== "gerecht" && p.f !== al.cover)].filter(Boolean).slice(0, 6);
     return `<section style="margin-bottom:48px"><div class="sec-head"><h2>Foto's van deze avond</h2><a href="#album-${al.id}">Alle ${al.photos.length} foto's</a></div><div class="strip">${ps.map((p, i) => tile("les", ps, i)).join("")}</div></section>`; })() : "";
   $("#detail").innerHTML = `<div class="wrap dbody">${strip}
-    <div class="sec-head"><h2>Het menu</h2></div>
+    <div class="sec-head"><h2>Het menu</h2>${L.dishes.some(d => d.l.v != null) ? `<button class="btn-ghost" id="menu-add" data-key="${L.key}">Hele menu op boodschappenlijst</button>` : ""}</div>
     <div class="menu-list">${L.dishes.map(({r, l}, i) => {
       const otherDates = r.dated.filter(x => lkey(x) !== L.key);
       const ph = al && (PBYREC[r.id] || []).find(p => p.album === al);
@@ -823,6 +865,129 @@ function renderAlbum(a) {
       return `<figure>${tile("album", all, all.indexOf(p), "", true).replace('<button class="tile ', `<button style="aspect-ratio:${p.w}/${p.h}" class="tile `)}<figcaption>${r ? `<a href="#recept-${r.id}">${esc(r.title)}</a>` : esc(p.caption || "")}</figcaption></figure>`; }).join("")}</div></section>`; }).join("")}</div>`;
 }
 
+
+/* ---------- quantities & shopping list ---------- */
+const LS = { get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
+const FRAC = { "½": .5, "¼": .25, "¾": .75, "⅓": 1/3, "⅔": 2/3 };
+const QN = String.raw`\d+\s+\d+\/\d+|\d+(?:[.,]\d+)?\s?[½¼¾⅓⅔]|\d+[.,]\d+|\d+\/\d+|\d+|[½¼¾⅓⅔]`;
+const QRE = new RegExp(`^(\\s*)(${QN})(\\s*(?:-|–|à|a|tot|of)\\s*(${QN}))?`);
+function qnum(t) {
+  t = t.trim(); let m;
+  if ((m = t.match(/^(\d+)\s+(\d+)\/(\d+)$/))) return +m[1] + m[2] / m[3];
+  if ((m = t.match(/^(\d+(?:[.,]\d+)?)\s?([½¼¾⅓⅔])$/))) return parseFloat(m[1].replace(",", ".")) + FRAC[m[2]];
+  if ((m = t.match(/^(\d+)\/(\d+)$/))) return m[1] / m[2];
+  if (FRAC[t] != null) return FRAC[t];
+  return parseFloat(t.replace(",", "."));
+}
+function qfmt(n) {
+  if (n >= 100) return String(Math.round(n / 5) * 5);
+  if (n >= 10) return String(Math.round(n));
+  const w = Math.floor(n), f = n - w;
+  const opts = [[0, ""], [.25, "¼"], [1/3, "⅓"], [.5, "½"], [2/3, "⅔"], [.75, "¾"], [1, ""]];
+  const b = opts.reduce((a, c) => Math.abs(c[0] - f) < Math.abs(a[0] - f) ? c : a);
+  if (Math.abs(b[0] - f) < .04) { const W = b[0] === 1 ? w + 1 : w; return ((W ? String(W) : "") + b[1]) || "0"; }
+  return String(Math.round(n * 10) / 10).replace(".", ",");
+}
+function scaleLine(s, f) {
+  const m = f === 1 ? null : QRE.exec(s);
+  if (!m) return { text: s, scaled: false };
+  const a = qnum(m[2]); if (!isFinite(a)) return { text: s, scaled: false };
+  let q = qfmt(a * f);
+  if (m[4]) { const b = qnum(m[4]); if (isFinite(b)) q += m[3].slice(0, m[3].lastIndexOf(m[4])) + qfmt(b * f); }
+  return { text: m[1] + q + s.slice(m[0].length), q, rest: s.slice(m[0].length), lead: m[1], scaled: true };
+}
+const statedBase = v => { const m = (v && v.servings || "").match(/(\d+)/); return m ? +m[1] : null; };
+const pkey = (id, vi) => id + "~" + vi;
+function getPers(r, vi) {
+  const s = LS.get("odw-pers", {})[pkey(r.id, vi)] || {};
+  const b0 = statedBase(r.versions[vi]);
+  const base = s.base ?? b0 ?? null;
+  return { base, people: base ? (s.people ?? base) : null, stated: b0 != null };
+}
+function setPers(r, vi, o) { const all = LS.get("odw-pers", {}); all[pkey(r.id, vi)] = { ...(all[pkey(r.id, vi)] || {}), ...o }; LS.set("odw-pers", all); }
+const stepper = (id, val, dis) => `<div class="stepper"><button type="button" data-step="${id}" data-d="-1" aria-label="Minder" ${dis ? "disabled" : ""}>−</button><input id="${id}" type="number" min="1" max="200" inputmode="numeric" placeholder="?" value="${val ?? ""}" ${dis ? "disabled" : ""} aria-label="${id === "p-base" ? "Recept voor aantal personen" : "Koken voor aantal personen"}"><button type="button" data-step="${id}" data-d="1" aria-label="Meer" ${dis ? "disabled" : ""}>+</button></div>`;
+function persHtml(r, vi) {
+  const p = getPers(r, vi);
+  return `<div class="pers" id="pers">
+    <div class="prow"><span>Recept voor</span>${stepper("p-base", p.base)}</div>
+    <div class="prow"><span>Ik kook voor</span>${stepper("p-people", p.people, !p.base)}</div>
+    ${p.stated ? "" : `<p class="phint" id="p-hint">${p.base ? "Aantal personen zelf ingevuld." : "Het recept vermeldt niet voor hoeveel personen het is. Vul het in, dan rekenen we de hoeveelheden om."}</p>`}
+  </div>`;
+}
+let CUR = null;
+function renderIng() {
+  if (!CUR || !$("#ing-list")) return;
+  const { r, vi } = CUR, v = r.versions[vi], p = getPers(r, vi);
+  const f = p.base && p.people ? p.people / p.base : 1;
+  const T = terms();
+  $("#ing-list").innerHTML = (v.ingredients || []).map(g => `${g.group ? `<h5>${esc(g.group)}</h5>` : ""}<ul>${(g.items || []).map(i => {
+    const sc = scaleLine(i, f);
+    return sc.scaled ? `<li class="scaled">${esc(sc.lead)}<span class="q">${esc(sc.q)}</span>${hl(sc.rest, T)}</li>` : `<li>${hl(i, T)}</li>`;
+  }).join("")}</ul>`).join("");
+  const onList = shopList().items.some(x => x.id === r.id && x.vi === vi);
+  const b = $("#add-list");
+  b.classList.toggle("done", onList);
+  b.textContent = onList ? `Op je lijst (voor ${p.people ?? "?"} pers.) · bijwerken` : `Zet op boodschappenlijst${p.people ? ` (${p.people} pers.)` : ""}`;
+}
+function syncPers() {
+  if (!CUR) return;
+  const { r, vi } = CUR, p = getPers(r, vi);
+  const pi = $("#p-people"), dis = !p.base;
+  pi.disabled = dis; pi.value = p.people ?? "";
+  document.querySelectorAll('[data-step="p-people"]').forEach(b => b.disabled = dis);
+  const h = $("#p-hint"); if (h) h.textContent = p.base ? "Aantal personen zelf ingevuld." : "Het recept vermeldt niet voor hoeveel personen het is. Vul het in, dan rekenen we de hoeveelheden om.";
+  renderIng();
+}
+function persChange(id, val) {
+  if (!CUR) return;
+  const { r, vi } = CUR, p = getPers(r, vi);
+  val = Math.max(1, Math.min(200, Math.round(val) || 0)) || null;
+  if (id === "p-base") { setPers(r, vi, { base: val, people: p.people && p.base ? p.people : val }); $("#p-base").value = val ?? ""; }
+  else setPers(r, vi, { people: val });
+  syncPers();
+}
+/* list */
+const shopList = () => LS.get("odw-lijst", { items: [], checked: {} });
+const saveList = l => { LS.set("odw-lijst", l); updateCart(); };
+function updateCart() { const n = shopList().items.length; $("#cart-n").hidden = !n; $("#cart-n").textContent = n; }
+function addToList(r, vi, people, base) {
+  const l = shopList();
+  const it = { id: r.id, vi, base: base ?? null, people: people ?? null };
+  const i = l.items.findIndex(x => x.id === r.id && x.vi === vi);
+  if (i > -1) l.items[i] = it; else l.items.push(it);
+  saveList(l);
+}
+function listLines(it) {
+  const r = BYID[it.id], v = r && r.versions[it.vi]; if (!v) return [];
+  const f = it.base && it.people ? it.people / it.base : 1;
+  return (v.ingredients || []).map((g, gi) => ({ group: g.group, items: (g.items || []).map((x, ii) => ({ key: `${it.id}~${it.vi}|${gi}.${ii}`, text: scaleLine(x, f).text })) }));
+}
+let clearArmed = 0;
+function renderShop() {
+  const l = shopList();
+  const n = l.items.reduce((a, it) => a + listLines(it).reduce((b, g) => b + g.items.length, 0), 0);
+  $("#dhead").innerHTML = `<a class="back" href="#recepten">← Alle recepten</a>
+    <p class="badge"><span>${l.items.length} ${l.items.length === 1 ? "gerecht" : "gerechten"}</span><span>${n} ingrediënten</span></p>
+    <h1>Boodschappen<em>lijst</em></h1>`;
+  if (!l.items.length) { $("#detail").innerHTML = `<div class="wrap dbody"><p class="note">Je lijst is nog leeg. Open een recept en klik op "Zet op boodschappenlijst", of zet een heel menu op je lijst vanaf de pagina van een les.</p><p><a class="btn" href="#recepten">Naar de recepten</a></p></div>`; return; }
+  $("#detail").innerHTML = `<div class="wrap dbody">
+    <div class="shop-tools"><button class="btn-ghost" id="shop-copy">Kopieer lijst</button><button class="btn-ghost" id="shop-uncheck">Vinkjes wissen</button><button class="btn-ghost" id="shop-clear">Lijst leegmaken</button><span class="note" id="shop-msg" aria-live="polite"></span></div>
+    ${l.items.map((it, k) => { const r = BYID[it.id]; if (!r) return "";
+      const lines = listLines(it);
+      return `<section class="shop">
+        <div class="shop-h"><h3><a href="#recept-${r.id}${it.vi ? "~v" + it.vi : ""}">${esc(r.title)}</a></h3>
+          <div class="ctl">${it.base ? `<span>voor</span>${stepper("s-" + k, it.people)}<span>pers.</span>` : ""}<button class="xbtn" data-rmitem="${k}">Verwijderen</button></div></div>
+        ${it.base ? "" : `<p class="warn">Niet omgerekend: het aantal personen van dit recept is niet ingevuld.</p>`}
+        ${lines.map(g => `${g.group ? `<h5>${esc(g.group)}</h5>` : ""}<ul>${g.items.map(x => `<li><label><input type="checkbox" data-chk="${esc(x.key)}" ${l.checked[x.key] ? "checked" : ""}><span>${esc(x.text)}</span></label></li>`).join("")}</ul>`).join("")}
+      </section>`; }).join("")}
+  </div>`;
+}
+function shopText() {
+  const l = shopList();
+  return l.items.map(it => { const r = BYID[it.id]; if (!r) return "";
+    return `${r.title}${it.people && it.base ? ` (voor ${it.people} pers.)` : ""}\n` + listLines(it).map(g => (g.group ? `  ${g.group}:\n` : "") + g.items.filter(x => !l.checked[x.key]).map(x => `  - ${x.text}`).join("\n")).join("\n"); }).join("\n\n");
+}
+
 /* ---------- router ---------- */
 let homeScroll = 0, onHome = true, curHash = "";
 function show(page) {
@@ -835,6 +1000,10 @@ function route() {
     if (onHome) homeScroll = scrollY;
     onHome = false; show("detail"); renderRecipe(BYID[m[1]], m[2] ? +m[2] : null);
     document.title = BYID[m[1]].title + " · Orgie der Wijzen"; scrollTo(0, 0); return;
+  }
+  if (h === "boodschappen") {
+    if (onHome) homeScroll = scrollY;
+    onHome = false; show("detail"); CUR = null; renderShop(); document.title = "Boodschappenlijst · Orgie der Wijzen"; scrollTo(0, 0); return;
   }
   if (h === "fotos" || ((m = h.match(/^album-([a-z0-9-]+)$/)) && ABYID[m[1]])) {
     if (onHome) homeScroll = scrollY;
@@ -871,6 +1040,28 @@ window.addEventListener("hashchange", () => { if (location.hash !== curHash) { c
 function setView(v) { st.view = v; $("#tab-recepten").setAttribute("aria-pressed", v === "recepten"); $("#tab-lessen").setAttribute("aria-pressed", v === "lessen"); }
 
 document.addEventListener("click", e => {
+  const st_ = e.target.closest("[data-step]");
+  if (st_) { const inp = $("#" + st_.dataset.step); const cur = +inp.value || (st_.dataset.step.startsWith("s-") ? 1 : 0);
+    const nv = Math.max(1, cur + +st_.dataset.d || 1);
+    if (st_.dataset.step.startsWith("s-")) { const k = +st_.dataset.step.slice(2), l = shopList(); l.items[k].people = Math.max(1, (l.items[k].people || 1) + +st_.dataset.d); saveList(l); renderShop(); }
+    else persChange(st_.dataset.step, cur ? nv : (+st_.dataset.d > 0 ? 4 : 1));
+    return; }
+  if (e.target.closest("#add-list")) { const { r, vi } = CUR, p = getPers(r, vi); addToList(r, vi, p.people, p.base); renderIng(); return; }
+  const ma = e.target.closest("#menu-add");
+  if (ma) { const L = LBYKEY[ma.dataset.key]; let n = 0;
+    for (const d of L.dishes) { if (d.l.v == null) continue; const p = getPers(d.r, d.l.v); addToList(d.r, d.l.v, p.people, p.base); n++; }
+    ma.textContent = `${n} gerechten op je lijst ✓`; return; }
+  const rmi = e.target.closest("[data-rmitem]");
+  if (rmi) { const l = shopList(); l.items.splice(+rmi.dataset.rmitem, 1); saveList(l); renderShop(); return; }
+  if (e.target.closest("#shop-uncheck")) { const l = shopList(); l.checked = {}; saveList(l); renderShop(); return; }
+  if (e.target.closest("#shop-clear")) { const b = e.target.closest("#shop-clear");
+    if (Date.now() - clearArmed < 4000) { saveList({ items: [], checked: {} }); renderShop(); clearArmed = 0; }
+    else { clearArmed = Date.now(); b.textContent = "Zeker? Klik nog eens"; setTimeout(() => { if (b.isConnected) b.textContent = "Lijst leegmaken"; }, 4000); }
+    return; }
+  if (e.target.closest("#shop-copy")) { const t = shopText(), msg = $("#shop-msg");
+    const done = () => msg.textContent = "Gekopieerd.";
+    try { navigator.clipboard.writeText(t).then(done, () => { msg.textContent = "Kopiëren lukte niet; selecteer de lijst zelf."; }); } catch { msg.textContent = "Kopiëren lukte niet; selecteer de lijst zelf."; }
+    return; }
   const t = e.target.closest("[data-lb]");
   if (t) { openLB(LBSETS[t.dataset.lb], +t.dataset.i); return; }
   if (e.target.closest("#lb-x") || e.target.id === "lb") { closeLB(); return; }
@@ -902,6 +1093,13 @@ document.addEventListener("keydown", e => {
 let tmr; $("#q").addEventListener("input", e => { clearTimeout(tmr); tmr = setTimeout(() => { st.q = e.target.value; st.limit = 60; renderHome(true); }, 160); });
 $("#sort").addEventListener("change", e => { st.sort = e.target.value; renderHome(true); });
 $("#reset").addEventListener("click", () => { FKEYS.forEach(k => st[k].clear()); st.limit = 60; renderHome(true); });
+document.addEventListener("change", e => {
+  const c = e.target.closest("[data-chk]");
+  if (c) { const l = shopList(); if (c.checked) l.checked[c.dataset.chk] = true; else delete l.checked[c.dataset.chk]; saveList(l); return; }
+  if (e.target.id === "p-base" || e.target.id === "p-people") { persChange(e.target.id, +e.target.value); return; }
+  const sp = e.target.id && e.target.id.match(/^s-(\d+)$/);
+  if (sp) { const l = shopList(); l.items[+sp[1]].people = Math.max(1, Math.round(+e.target.value) || 1); saveList(l); renderShop(); }
+});
 $("#filters").addEventListener("change", e => { const i = e.target.closest("input[data-k]"); if (!i) return; const set = st[i.dataset.k]; i.checked ? set.add(i.dataset.v) : set.delete(i.dataset.v); st.limit = 60; renderHome(true); });
 const closeFilters = () => { $("#filters").classList.remove("open"); $("#ftoggle").setAttribute("aria-expanded", false); document.body.style.overflow = ""; };
 $("#fclose").addEventListener("click", closeFilters);
@@ -919,6 +1117,7 @@ Promise.all([fetch("recipes.json").then(r => r.json()), fetch("fotos.json").then
   const years = LESSONS.map(L => +L.date.slice(0,4));
   renderMosaic();
   startHero();
+  updateCart();
   $("#n-rec").textContent = R.length + " recepten";
   $("#n-les").textContent = LESSONS.length + " kooklessen";
   $("#n-first").textContent = Math.min(...years);
