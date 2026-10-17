@@ -901,20 +901,17 @@ const pkey = (id, vi) => id + "~" + vi;
 function getPers(r, vi) {
   const s = LS.get("odw-pers", {})[pkey(r.id, vi)] || {};
   const b0 = statedBase(r.versions[vi]);
-  const base = s.base ?? b0 ?? null;
+  const base = b0;
   return { base, people: base ? (s.people ?? base) : null, stated: b0 != null };
 }
 function setPers(r, vi, o) { const all = LS.get("odw-pers", {}); all[pkey(r.id, vi)] = { ...(all[pkey(r.id, vi)] || {}), ...o }; LS.set("odw-pers", all); }
-const stepper = (id, val, dis) => `<div class="stepper"><button type="button" data-step="${id}" data-d="-1" aria-label="Minder" ${dis ? "disabled" : ""}>−</button><input id="${id}" type="number" min="1" max="200" inputmode="numeric" placeholder="?" value="${val ?? ""}" ${dis ? "disabled" : ""} aria-label="${id === "p-base" ? "Recept voor aantal personen" : "Koken voor aantal personen"}"><button type="button" data-step="${id}" data-d="1" aria-label="Meer" ${dis ? "disabled" : ""}>+</button></div>`;
+const stepper = (id, val, dis) => `<div class="stepper"><button type="button" data-step="${id}" data-d="-1" aria-label="Minder" ${dis ? "disabled" : ""}>−</button><input id="${id}" type="number" min="1" max="200" inputmode="numeric" placeholder="?" value="${val ?? ""}" ${dis ? "disabled" : ""} aria-label="Aantal personen"><button type="button" data-step="${id}" data-d="1" aria-label="Meer" ${dis ? "disabled" : ""}>+</button></div>`;
 function persHtml(r, vi) {
   const p = getPers(r, vi);
-  if (!p.base) return `<div class="pers" id="pers">
-    <div class="prow"><span>Voor hoeveel personen is dit recept?</span><span style="display:inline-flex;gap:8px;align-items:center">${stepper("p-base", 4)}<button type="button" class="btn-ghost" id="p-ok">OK</button></span></div>
-    <p class="phint">Het recept vermeldt het niet. Vul het één keer in, dan kan je de hoeveelheden omrekenen.</p>
-  </div>`;
+  if (!p.base) return "";
   return `<div class="pers" id="pers">
     <div class="prow"><span>Personen</span>${stepper("p-people", p.people)}</div>
-    <p class="phint">Het recept is voor ${p.base} ${p.base === 1 ? "persoon" : "personen"}${p.stated ? "" : ` (zelf ingevuld · <button type="button" class="xbtn" id="p-reset">wijzigen</button>)`}.</p>
+    <p class="phint">Het recept is voor ${p.base} ${p.base === 1 ? "persoon" : "personen"}.</p>
   </div>`;
 }
 let CUR = null;
@@ -930,21 +927,19 @@ function renderIng() {
   const onList = shopList().items.some(x => x.id === r.id && x.vi === vi);
   const b = $("#add-list");
   b.classList.toggle("done", onList);
-  b.textContent = onList ? `Op je lijst (voor ${p.people ?? "?"} pers.) · bijwerken` : `Zet op boodschappenlijst${p.people ? ` (${p.people} pers.)` : ""}`;
+  b.textContent = onList ? `Op je lijst${p.people ? ` (voor ${p.people} pers.)` : ""} · bijwerken` : `Zet op boodschappenlijst${p.people ? ` (${p.people} pers.)` : ""}`;
 }
 function syncPers() {
-  if (!CUR || !$("#pers")) return;
-  const { r, vi } = CUR, p = getPers(r, vi);
-  if (p.base && $("#p-people")) $("#p-people").value = p.people ?? "";
-  else $("#pers").outerHTML = persHtml(r, vi);
+  if (!CUR || !$("#p-people")) return;
+  const { r, vi } = CUR;
+  $("#p-people").value = getPers(r, vi).people ?? "";
   renderIng();
 }
 function persChange(id, val) {
   if (!CUR) return;
-  const { r, vi } = CUR, p = getPers(r, vi);
+  const { r, vi } = CUR;
   val = Math.max(1, Math.min(200, Math.round(val) || 0)) || null;
-  if (id === "p-base") { setPers(r, vi, { base: val, people: val }); $("#pers").outerHTML = persHtml(r, vi); renderIng(); return; }
-  else setPers(r, vi, { people: val });
+  setPers(r, vi, { people: val });
   syncPers();
 }
 /* list */
@@ -978,7 +973,6 @@ function renderShop() {
       return `<section class="shop">
         <div class="shop-h"><h3><a href="#recept-${r.id}${it.vi ? "~v" + it.vi : ""}">${esc(r.title)}</a></h3>
           <div class="ctl">${it.base ? `<span>voor</span>${stepper("s-" + k, it.people)}<span>pers.</span>` : ""}<button class="xbtn" data-rmitem="${k}">Verwijderen</button></div></div>
-        ${it.base ? "" : `<p class="warn">Niet omgerekend: het aantal personen van dit recept is niet ingevuld.</p>`}
         ${lines.map(g => `${g.group ? `<h5>${esc(g.group)}</h5>` : ""}<ul>${g.items.map(x => `<li><label><input type="checkbox" data-chk="${esc(x.key)}" ${l.checked[x.key] ? "checked" : ""}><span>${esc(x.text)}</span></label></li>`).join("")}</ul>`).join("")}
       </section>`; }).join("")}
   </div>`;
@@ -1045,11 +1039,8 @@ document.addEventListener("click", e => {
   if (st_) { const inp = $("#" + st_.dataset.step); const cur = +inp.value || (st_.dataset.step.startsWith("s-") ? 1 : 0);
     const nv = Math.max(1, cur + +st_.dataset.d || 1);
     if (st_.dataset.step.startsWith("s-")) { const k = +st_.dataset.step.slice(2), l = shopList(); l.items[k].people = Math.max(1, (l.items[k].people || 1) + +st_.dataset.d); saveList(l); renderShop(); }
-    else if (st_.dataset.step === "p-base") inp.value = nv;
     else persChange(st_.dataset.step, cur ? nv : (+st_.dataset.d > 0 ? 4 : 1));
     return; }
-  if (e.target.closest("#p-ok")) { persChange("p-base", +$("#p-base").value); return; }
-  if (e.target.closest("#p-reset")) { const { r, vi } = CUR; setPers(r, vi, { base: null, people: null }); $("#pers").outerHTML = persHtml(r, vi); renderIng(); return; }
   if (e.target.closest("#add-list")) { const { r, vi } = CUR, p = getPers(r, vi); addToList(r, vi, p.people, p.base); renderIng(); return; }
   const ma = e.target.closest("#menu-add");
   if (ma) { const L = LBYKEY[ma.dataset.key]; let n = 0;
@@ -1091,7 +1082,6 @@ document.addEventListener("click", e => {
   if (e.target.id === "more") { st.limit += 60; renderHome(); }
 });
 document.addEventListener("keydown", e => {
-  if (e.key === "Enter" && e.target.id === "p-base") { persChange("p-base", +e.target.value); return; }
   if (!$("#lb").hidden) { if (e.key === "Escape") closeLB(); if (e.key === "ArrowLeft") stepLB(-1); if (e.key === "ArrowRight") stepLB(1); return; }
   if (e.key === "/" && onHome && document.activeElement !== $("#q")) { e.preventDefault(); $("#q").focus(); }
 });
