@@ -510,7 +510,6 @@ function buildLessons() {
     if (!m.has(k)) m.set(k, { key: k, date: l.date, event: l.event, dishes: [], sources: new Set() });
     const L = m.get(k);
     L.dishes.push({ r, l });
-    if (l.guessed) L.guessed = true;
     if (l.source) L.sources.add(l.source);
   }
   LESSONS = [...m.values()].sort((a,b) => b.key.localeCompare(a.key));
@@ -682,6 +681,7 @@ function renderRecipe(r, vi) {
     <p class="badge"><span>${esc(cl(r.course))}</span><span>${dated.length ? dated.length + (dated.length > 1 ? " lessen" : " les") : "los recept"}</span>${r.last ? `<span>laatst ${fmtDate(r.last)}</span>` : ""}</p>
     <h1>${esc(r.title)}</h1>
     ${r.intro ? `<p class="intro">${esc(r.intro)}</p>` : ""}
+    ${r.credit ? `<p class="intro">${esc(r.credit)}</p>` : ""}
     <div class="tags">${r.events.includes("Ladiesnight") ? '<span class="tagpill lady">ladiesnight</span>' : ""}${r.tags.map(t => `<span class="tagpill">${esc(t)}</span>`).join("")}</div>
     ${(PBYREC[r.id] || []).length ? `<div class="plate small"><img class="on" src="${fsrc(PBYREC[r.id][0].album, PBYREC[r.id][0])}" alt="${esc(PBYREC[r.id][0].caption)}"></div>` : ""}`;
   const rp = PBYREC[r.id] || [];
@@ -719,7 +719,7 @@ function renderLesson(L) {
   const T = terms();
   const i = LESSONS.indexOf(L), newer = LESSONS[i-1], older = LESSONS[i+1];
   $("#dhead").innerHTML = `<a class="back" href="#kooklessen">← Alle kooklessen</a>
-    <p class="badge"><span>${esc(L.event)}</span><span>${season(L.date)}</span><span>${L.dishes.length} gerechten</span>${L.guessed ? "<span>datum geschat</span>" : ""}</p>
+    <p class="badge"><span>${esc(L.event)}</span><span>${season(L.date)}</span><span>${L.dishes.length} gerechten</span></p>
     <h1>${fmtDate(L.date, "long").replace(/^(\S+) (.*)$/, "$1 <em>$2</em>")}</h1>`;
   const al = ABYDATE[L.date];
   const strip = al ? (() => { const ps = [al.photos.find(p => p.f === al.cover), ...al.photos.filter(p => p.kind !== "gerecht" && p.f !== al.cover)].filter(Boolean).slice(0, 6);
