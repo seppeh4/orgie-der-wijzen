@@ -366,7 +366,7 @@ footer .logo { font-size: 1.15rem; }
   </nav>
   <header class="wrap hero" data-page="home">
     <div class="hero-copy">
-      <p class="badge"><span>Kooklessen sinds 2010</span></p>
+      <p class="badge"><span>25 jaar · 2002 – 2027</span></p>
       <h1>Elk gerecht, <span class="nb">bewaard!</span></h1>
       <p class="lead">Alle recepten van de kooklessen op één plek, met de datum waarop we ze samen maakten. Zoek op gerecht, ingrediënt of lesdatum.</p>
       <a class="btn" href="#recepten">Zoek een recept</a>
@@ -385,7 +385,7 @@ footer .logo { font-size: 1.15rem; }
     <div class="fcard pad"><h3 id="n-les">105 kooklessen</h3><p>Ongeveer één woensdagavond per maand koken we samen een volledig menu.</p><a class="btn-ghost" href="#kooklessen">Bekijk de lessen</a></div>
     <div class="fcard"><h3>Samen koken</h3><p>Iedereen staat mee aan het fornuis, en daarna schuiven we samen aan tafel.</p><img class="pic" src="fotos/ladiesnight-2026-06-17/13-kookgroep-1-klein.jpg" alt="De kookgroep"></div>
     <div class="fcard"><h3>Ladiesnight</h3><p>Eén keer per jaar is er de ladiesnight, met een feestelijk menu.</p><img class="pic" src="fotos/ladiesnight-2026-06-17/15-dames-1-klein.jpg" alt="De dames van de ladiesnight"></div>
-    <div class="fcard pad"><h3 id="n-first">Sinds 2010</h3><p>Komt een gerecht in meerdere lessen terug? Op de receptpagina zie je in welke lessen, en of het recept toen anders was.</p></div>
+    <div class="fcard pad"><h3>25 jaar</h3><p>Sinds 2002 koken we samen; in 2027 vieren we 25 jaar Orgie der Wijzen. Dit receptenboek gaat terug tot <span id="n-first">2007</span> en groeit nog elke les.</p></div>
   </div>
 </section>
 
@@ -455,7 +455,7 @@ footer .logo { font-size: 1.15rem; }
   <button class="lb-x" id="lb-x" aria-label="Sluiten">×</button>
 </div>
 
-<footer><div class="wrap"><span class="logo">Orgie der Wijzen</span><span>Kooklessen sinds 2010</span></div></footer>
+<footer><div class="wrap"><span class="logo">Orgie der Wijzen</span><span>2002 – 2027 · 25 jaar kooklessen</span></div></footer>
 
 <script is:inline>
 const COURSES = [
@@ -510,6 +510,7 @@ function buildLessons() {
     if (!m.has(k)) m.set(k, { key: k, date: l.date, event: l.event, dishes: [], sources: new Set() });
     const L = m.get(k);
     L.dishes.push({ r, l });
+    if (l.guessed) L.guessed = true;
     if (l.source) L.sources.add(l.source);
   }
   LESSONS = [...m.values()].sort((a,b) => b.key.localeCompare(a.key));
@@ -718,7 +719,7 @@ function renderLesson(L) {
   const T = terms();
   const i = LESSONS.indexOf(L), newer = LESSONS[i-1], older = LESSONS[i+1];
   $("#dhead").innerHTML = `<a class="back" href="#kooklessen">← Alle kooklessen</a>
-    <p class="badge"><span>${esc(L.event)}</span><span>${season(L.date)}</span><span>${L.dishes.length} gerechten</span></p>
+    <p class="badge"><span>${esc(L.event)}</span><span>${season(L.date)}</span><span>${L.dishes.length} gerechten</span>${L.guessed ? "<span>datum geschat</span>" : ""}</p>
     <h1>${fmtDate(L.date, "long").replace(/^(\S+) (.*)$/, "$1 <em>$2</em>")}</h1>`;
   const al = ABYDATE[L.date];
   const strip = al ? (() => { const ps = [al.photos.find(p => p.f === al.cover), ...al.photos.filter(p => p.kind !== "gerecht" && p.f !== al.cover)].filter(Boolean).slice(0, 6);
@@ -845,7 +846,7 @@ function route() {
   if ((m = h.match(/^les-([0-9-]+(?:-ladiesnight)?)$/)) && LBYKEY[m[1]]) {
     if (onHome) homeScroll = scrollY;
     onHome = false; show("detail"); renderLesson(LBYKEY[m[1]]);
-    document.title = "Kookles " + fmtDate(LBYKEY[m[1]].date) + " · Orgie der Wijzen"; scrollTo(0, 0); return;
+    document.title = LBYKEY[m[1]].event + " " + fmtDate(LBYKEY[m[1]].date) + " · Orgie der Wijzen"; scrollTo(0, 0); return;
   }
   const wasHome = onHome;
   onHome = true; show("home"); document.title = "Orgie der Wijzen";
@@ -920,7 +921,7 @@ Promise.all([fetch("recipes.json").then(r => r.json()), fetch("fotos.json").then
   startHero();
   $("#n-rec").textContent = R.length + " recepten";
   $("#n-les").textContent = LESSONS.length + " kooklessen";
-  $("#n-first").textContent = "Sinds " + Math.min(...years);
+  $("#n-first").textContent = Math.min(...years);
   $("#latest").innerHTML = LESSONS.slice(0, 6).map((L, i) => `<a class="pitem" href="#les-${L.key}">
     <span class="num">${String(i+1).padStart(2,"0")}</span>
     <div><span class="ev">${season(L.date)}</span><h3>${fmtDate(L.date, "long")}</h3></div>
