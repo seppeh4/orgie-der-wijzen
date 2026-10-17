@@ -754,7 +754,7 @@ function renderRecipe(r, vi) {
   $("#detail").innerHTML = `<div class="wrap dbody">${body}</div>
     ${dated.length ? `<section class="band lessons-band after"><div class="wrap">
       <div class="sec-head" style="margin-bottom:24px"><h2>${dated.length > 1 ? `In ${dated.length} kooklessen` : "In deze kookles"}</h2></div>
-      <p class="sub">${sub}${nv > 1 ? `, in ${nv} verschillende versies. Kies hieronder welke versie je wil zien.` : "."}</p>
+      ${nv > 1 ? `<p class="sub">Dit gerecht werd in ${nv} verschillende versies gemaakt. Kies hieronder welke versie je wil zien.</p>` : ""}
       <div class="lgrid">${lcards}</div>${looseNote}</div></section>` : ""}`;
   CUR = { r, vi };
   if ($("#ing-list")) renderIng();
