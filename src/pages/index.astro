@@ -85,7 +85,7 @@ nav.wrap { display: flex; align-items: center; justify-content: space-between; g
 .countdown .cd-l { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
 .countdown .cd-u { display: flex; gap: 6px; }
 .countdown .cd-u div { min-width: 64px; display: flex; flex-direction: column; align-items: center; }
-.countdown .cd-u b { font-family: var(--f-display); font-weight: 600; font-size: 2.3rem; line-height: 1; font-variant-numeric: tabular-nums lining-nums; }
+.countdown .cd-u b { font-family: var(--f-display); font-weight: 600; font-size: 3.2rem; line-height: 1; font-variant-numeric: tabular-nums lining-nums; }
 .countdown .cd-u span { font-size: .7rem; opacity: .8; margin-top: 4px; }
 .countdown .cd-d { font-size: .82rem; opacity: .85; }
 .countdown.done .cd-u { display: none; }
@@ -427,7 +427,7 @@ nav .navr { display: flex; align-items: center; gap: 26px; }
       <a class="alt" href="#kooklessen">Bekijk alle kooklessen</a>
       <div class="countdown" id="countdown" role="timer" aria-live="off">
         <span class="cd-l" id="cd-l">Nog tot 25 jaar Orgie der Wijzen</span>
-        <div class="cd-u"><div><b id="cd-d">–</b><span>dagen</span></div><div><b id="cd-h">–</b><span>uur</span></div><div><b id="cd-m">–</b><span>min</span></div><div><b id="cd-s">–</b><span>sec</span></div></div>
+        <div class="cd-u"><div><b id="cd-d">–</b><span id="cd-dl">dagen</span></div></div>
         <span class="cd-d">Zaterdag 26 juni 2027 · 25 jaar na de eerste kookles</span>
       </div>
     </div>
@@ -1003,21 +1003,18 @@ function shopText() {
 
 /* ---------- countdown ---------- */
 (function () {
-  const T = new Date(2027, 5, 26, 19, 0, 0);
-  const pad = n => String(n).padStart(2, "0");
   function tick() {
-    const ms = T - new Date();
-    if (ms <= 0) {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const days = Math.round((new Date(2027, 5, 26) - today) / 86400000);
+    if (days <= 0) {
       $("#countdown").classList.add("done");
-      $("#cd-l").textContent = ms > -86400000 ? "Vandaag: 25 jaar Orgie der Wijzen!" : "25 jaar Orgie der Wijzen · 2002 – 2027";
+      $("#cd-l").textContent = days === 0 ? "Vandaag: 25 jaar Orgie der Wijzen!" : "25 jaar Orgie der Wijzen · 2002 – 2027";
       return;
     }
-    const s = Math.floor(ms / 1000);
-    $("#cd-d").textContent = Math.floor(s / 86400);
-    $("#cd-h").textContent = pad(Math.floor(s / 3600) % 24);
-    $("#cd-m").textContent = pad(Math.floor(s / 60) % 60);
-    $("#cd-s").textContent = pad(s % 60);
-    setTimeout(tick, 1000 - (Date.now() % 1000));
+    $("#cd-d").textContent = days;
+    $("#cd-dl").textContent = days === 1 ? "dag" : "dagen";
+    setTimeout(tick, new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1) - now + 1000);
   }
   tick();
 })();
